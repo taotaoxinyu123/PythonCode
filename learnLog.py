@@ -1,6 +1,6 @@
 from loguru import logger
 import time
-
+import testDistributed
 """
 本文学习的Python日志怎么使用，使用的loguru的库，它非常的方便和快捷，在github很受推崇
 学习1：输出文件位置：1）logger.add("D://PycharmCode//taoxinyu//runtime_{time}.log")
@@ -15,10 +15,14 @@ import time
 学习2：输出日志级别：logger.add("D://PycharmCode//taoxinyu//runtime_{time}.log", level="DEBUG", rotation="1 MB")
                         level="DEBUG"表示输出大于DEBUG的日志级别，其他级别是INFO，DEBUG，WARNING,ERROR
 学习3：输出日志文件带参数：logger.info("输出的是：%s" %(a[i]))
-                        其实跟print输出带参数是一样的
+                        其实跟print输出带参数是一样的,其中%d-->整数
+                        若需要两个或者多个输出：logger.info("第一个输出的是：%s，%s" % (a[i],a[i]))
 学习4：try-except中使用日志：其实try-except应该是使用日志最多的地方
 
 学习5：@logger.catch()的使用：在函数的上方加上，可以具体查看出具体的错误显示-----这个感觉第一次惊艳到了我
+
+学习6：在主函数里面写了logger.add("D://PycharmCode//taoxinyu//runtime_{time}.log", level="DEBUG", rotation="1 MB")
+            可以在其他调用的文件中不需要在写这个语句，直接使用即可
 
 """
 
@@ -26,8 +30,8 @@ import time
 @logger.catch()
 def testerror():
     a = ["1", "2", "3"]
-    for i in range(4):
-        logger.info("输出的是：%s" % (a[i]))
+    for i in range(3):
+        logger.info("第一个输出的是：%s" % (a[i]))
 
 
 if __name__ == '__main__':
@@ -35,8 +39,9 @@ if __name__ == '__main__':
     while True:
         logger.info("That's it, beautiful and simple logging!")
         logger.debug("That's debug information!")
+        testDistributed.testDistributed()
         try:
             testerror()
         except  Exception as ex:
             logger.error('start exception:[%s]' % str(ex))
-        time.sleep(1)
+        time.sleep(10)
