@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script language="JavaScript" src="jquery/jquery.min.js"></script>
+</head>
+<body>
+<input type="text" id="text1" height="30px"><br>
+第一：点击按钮，传递传输为
+<input id="button1" type="button" onclick="ajaxupload()" value="第一个按钮">
+
+<script>
+    function ajaxupload() {
+        $('#text1').css("height",'200px'); //测试jquery是否能使用
+        $.ajax({
+            method: "GET",
+            async:false,
+            url:"",
+            contentType: "application/json", //raw传参必须有
+            success: function (response) {//ajax请求成功后触发的方法
+
+            },
+            error: function (msg) {//ajax请求失败后触发的方法
+
+            }
+        });
+    }
+</script>
+</body>
+</html>
